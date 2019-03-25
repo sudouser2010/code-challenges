@@ -34,11 +34,16 @@ class Foo():
     def find_element_frequency(self, element: str):
         return self.list.count(element)
 
-    def clear_list(self):
-        self.list = []
-
-    def line_has_queries(self, line: str):
-        return 'i' in line or 'f' in line
+    def process_query(self, query_instruction: str, query_character: str):
+        if query_instruction == 'i':
+            self.insert_element(query_character)
+        else:
+            frequency = self.find_element_frequency(query_character)
+            if frequency == 0:
+                print('Not Present')
+            else:
+                message = 'Frequency of {} is: {}'.format(query_character, frequency)
+                print(message)
 
     def process_line(self, line: str):
         length = len(line)
@@ -47,18 +52,14 @@ class Foo():
         while index < length:
             query_instruction = line[index]
             query_character = line[index+2]
-
-            if query_instruction == 'i':
-                self.insert_element(query_character)
-            else:
-                frequency = self.find_element_frequency(query_character)
-                if frequency == 0:
-                    print('Not Present')
-                else:
-                    message = 'Frequency of {} is: {}'.format(query_character, frequency)
-                    print(message)
-
+            self.process_query(query_instruction, query_character)
             index += 4
+
+    def clear_list(self):
+        self.list = []
+
+    def line_has_queries(self, line: str):
+        return 'i' in line or 'f' in line
 
     def parse_input_file(self):
         f = open(self.input_file_name, 'r')
