@@ -31,7 +31,7 @@ class Foo():
     def insert_element(self, element: str):
         self.list.append(element)
 
-    def find_element_frequency(self, element: str):
+    def find_element_frequency(self, element: str) -> int:
         return self.list.count(element)
 
     def process_query(self, query_instruction: str, query_character: str):
@@ -58,7 +58,7 @@ class Foo():
     def clear_list(self):
         self.list = []
 
-    def line_has_queries(self, line: str):
+    def line_has_queries(self, line: str) -> bool:
         return 'i' in line or 'f' in line
 
     def parse_input_file(self):
